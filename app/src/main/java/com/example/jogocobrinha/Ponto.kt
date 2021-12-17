@@ -4,7 +4,7 @@ import android.widget.ImageView
 
 //colocar o src da imagem da cobra
 
-class Cobra (cobraLinha: Int = 0, cobraColuna : Int = 0)  {
+class Ponto (cobraLinha: Int = 0, cobraColuna : Int = 0)  {
     var x = cobraLinha
     var y = cobraColuna
 }

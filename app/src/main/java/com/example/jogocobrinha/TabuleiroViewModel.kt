@@ -4,22 +4,18 @@ import android.widget.ImageView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.jogocobrinha.Cobra
+import com.example.jogocobrinha.Ponto
 
 
 
 
 class TabuleiroViewModel : ViewModel() {
 
-    private var _gameStatus = MutableLiveData<Boolean>(
-        false
-    )
+    private var _gameStatus = MutableLiveData<Boolean>(false)
     var gameStatus: LiveData<Boolean> = _gameStatus
 
 
-    private var _pontos = MutableLiveData<Int>(
-        0
-    )
+    private var _pontos = MutableLiveData<Int>(0)
     var pontos: LiveData<Int> = _pontos
 
 
@@ -42,18 +38,18 @@ class TabuleiroViewModel : ViewModel() {
     var tabuleiro: LiveData<Array<Array<ImageView?>>> = _tabuleiro
 
     private var _listPosicaoCobra = MutableLiveData(
-        mutableListOf<Cobra>()
+        mutableListOf<Ponto>()
         // {0;0} eh a posicao inicial da cobra ou seja o indice 0 da minha lista de Arrays de inteiros
     )
 
     //var cobra = Cobra(5,5)
 
-    var listPosicaoCobra: LiveData<MutableList<Cobra>> = _listPosicaoCobra
+    var listPosicaoCobra: LiveData<MutableList<Ponto>> = _listPosicaoCobra
 
 
     //----------------------------------FUNCTIONS-------------------------------------//
 
-    public fun cobraMovimento(_listPosicaoCobra : MutableList<Cobra>, tecla : Int ) {
+    public fun cobraMovimento(_listPosicaoCobra : MutableList<Ponto>, tecla : Int ) {
         when(tecla){
             //cima
             1 -> _listPosicaoCobra[0].x = _listPosicaoCobra[0].x - 1
@@ -68,7 +64,7 @@ class TabuleiroViewModel : ViewModel() {
     }
 
 
-    public fun cobraAdd(pos: Cobra) {
+    public fun cobraAdd(pos: Ponto) {
         _listPosicaoCobra.value!!.add(pos)
     }
 
