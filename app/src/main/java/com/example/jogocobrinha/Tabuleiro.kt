@@ -1,5 +1,6 @@
 package com.example.jogocobrinha
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -20,6 +21,7 @@ class Tabuleiro : AppCompatActivity() {
     lateinit var viewModel: TabuleiroViewModel
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -31,76 +33,73 @@ class Tabuleiro : AppCompatActivity() {
 
         val inflater = LayoutInflater.from(this)
 
+        var i = Intent(this, Resultado::class.java)
 
-        viewModel.listPosicaoCobra.value!!.add(Ponto(5, 5))
-        viewModel.listPosicaoCobra.value!!.add(Ponto(4, 5))
-        viewModel.listPosicaoCobra.value!!.add(Ponto(3, 5))
-        //viewModel.listPosicaoCobra.value!!.add(Ponto(5,4))
+
+        val params = intent.extras
+        //val dificuldade  = params?.getLong("DIFICULDADE")
+        //Log.i("DIFICULDADE", "$dificuldade")
+        //val tamanho_tabuleiro =  params?.getInt("TAMANHO_TABULEIRO")
+        //Log.i("TAM_TABULEIRO", "$tamanho_tabuleiro")
+
+       // viewModel.alterarDificuldade(dificuldade)
+       // viewModel.alterarTabuleiro(tamanho_tabuleiro, tamanho_tabuleiro)
+
+
+        viewModel.mudarMovimento(1)
 
         loadTabuleiro(inflater)
 
-        runGame()
+        viewModel.starGame()
+
+
+        runGame(i)
+
+
+
+
+
 
         binding.buttonMoverCima.setOnClickListener {
-            viewModel.listPosicaoCobra.value!!.forEach {
-                viewModel.cobraMovimento(viewModel.listPosicaoCobra.value!!, 1)
-                binding.gridLayout.removeAllViews()
-            }
+            viewModel.mudarMovimento(1)
         }
         binding.buttonMoverBaixo.setOnClickListener {
-            viewModel.listPosicaoCobra.value!!.forEach {
-                viewModel.cobraMovimento(viewModel.listPosicaoCobra.value!!, 2)
-                binding.gridLayout.removeAllViews()
-            }
+            viewModel.mudarMovimento(2)
         }
         binding.buttonMoverEsquerda.setOnClickListener {
-            viewModel.listPosicaoCobra.value!!.forEach {
-                viewModel.cobraMovimento(viewModel.listPosicaoCobra.value!!, 3)
-                binding.gridLayout.removeAllViews()
-            }
+            viewModel.mudarMovimento(3)
         }
         binding.buttonMoverDireita.setOnClickListener {
-            viewModel.listPosicaoCobra.value!!.forEach {
-                viewModel.cobraMovimento(viewModel.listPosicaoCobra.value!!, 4)
-                binding.gridLayout.removeAllViews()
-            }
+            viewModel.mudarMovimento(4)
         }
+
+
     }
 
-    fun runGame() {
+
+    fun runGame(intent : Intent) {
+
         Thread {
-            while (true) {
+            while (viewModel.gameStatus.value!! == true) {
                 Thread.sleep(1000)
                 runOnUiThread {
-                    limpaTabuleiro()
-                    printCobra()
-                    moveCobra()
+                    viewModel.limpaTabuleiro()
+
+                    viewModel.printFruta(viewModel.posicaoFrutaLinha.value!!, viewModel.posicaoFrutaColuna.value!!)
+                    viewModel.comeuFruta(viewModel.posicaoFrutaLinha.value!!, viewModel.posicaoFrutaColuna.value!!)
+                    viewModel.gameOver()
+                    viewModel.refreshCobra()
+                    viewModel.printCobra()
+                    viewModel.moveCobra(viewModel.direcao.value!!)
                 }
             }
+
+            var b = Bundle()
+            b.putString("PONTOS", viewModel.pontos.value!!.toString())
+            intent.putExtras(b)
+            startActivity(intent)
         }.start()
-    }
 
-
-    private fun moveCobra(){
-        for (i in 0 until viewModel.listPosicaoCobra.value!!.size) {
-            viewModel.listPosicaoCobra.value!!.get(i).y = viewModel.listPosicaoCobra.value!!.get(i).y + 1
-        }
-    }
-
-    private fun printCobra() {
-        for (i in 0 until viewModel.listPosicaoCobra.value!!.size) {
-            viewModel.tabuleiro.value!![viewModel.listPosicaoCobra.value!!.get(i).x][viewModel.listPosicaoCobra.value!!.get(
-                i
-            ).y]!!.setImageResource(R.drawable.corpo_cobra)
-        }
-    }
-
-    private fun limpaTabuleiro() {
-        for (i in 0 until viewModel.row.value!!) {
-            for (j in 0 until (viewModel.column.value!!)) {
-                viewModel.tabuleiro.value!![i][j]!!.setImageResource(R.drawable.tabuleiro)
-            }
-        }
     }
 
     private fun loadTabuleiro(inflater: LayoutInflater) {
@@ -118,6 +117,17 @@ class Tabuleiro : AppCompatActivity() {
             }
         }
     }
+
+
+
+
+
+
+
+
+
+
+
 }
 
 

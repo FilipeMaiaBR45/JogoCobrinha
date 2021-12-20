@@ -14,10 +14,16 @@ class MainActivity : AppCompatActivity() {
          binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
 
-        var intent = Intent(this, Tabuleiro::class.java)
+        var intent1 = Intent(this, Tabuleiro::class.java)
+        var intent2 = Intent(this, Configuracao::class.java)
+
 
         binding.buttonNovoJogo.setOnClickListener {
-            startActivity(intent)
+            startActivity(intent1)
+        }
+
+        binding.buttonConfiguracao.setOnClickListener {
+            startActivity(intent2)
         }
 
 

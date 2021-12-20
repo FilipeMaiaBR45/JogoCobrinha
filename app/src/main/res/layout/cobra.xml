@@ -12,9 +12,9 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/tabuleiro"
+        android:layout_width="8dp"
+        android:layout_height="8dp"
+        android:background="#749C51"
         />
 </layout>
 

@@ -17,12 +17,14 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="36dp"
+            android:layout_marginTop="16dp"
             android:fontFamily="@font/black_ops_one"
-            android:text="Jogo da Cobrinha"
+            android:text="JOGO DA COBRA"
             android:textColor="#4B4B24"
-            android:textSize="30sp"
+            android:textSize="30dp"
+            android:textStyle="normal"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.507"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -30,6 +32,7 @@
             android:id="@+id/imageView"
             android:layout_width="237dp"
             android:layout_height="207dp"
+            android:layout_marginTop="16dp"
             app:layout_constraintBottom_toTopOf="@+id/buttonNovoJogo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -41,40 +44,47 @@
             android:id="@+id/buttonNovoJogo"
             android:layout_width="wrap_content"
             android:layout_height="51dp"
+            android:layout_marginTop="32dp"
             android:fontFamily="@font/black_ops_one"
+
             android:text="Novo Jogo"
-            android:textColor="@color/title_color"
-            app:layout_constraintBottom_toTopOf="@+id/button2"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toTopOf="@+id/buttonContinuar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/buttonContinuar"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
             android:fontFamily="@font/black_ops_one"
-            android:text="Continuar"
-            android:textColor="@color/title_color"
-            app:layout_constraintBottom_toTopOf="@+id/button3"
+            android:textColor="#FFFFFF"
+            android:text="CONTINUAR"
+            app:layout_constraintBottom_toTopOf="@+id/buttonConfiguracao"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_bias="0.505"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/buttonNovoJogo" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/buttonConfiguracao"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="24dp"
             android:fontFamily="@font/black_ops_one"
-            android:text="Configurar"
-            android:textColor="@color/title_color"
+            android:textColor="#FFFFFF"
+            android:text="CONFIGURAÇÃO"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button2" />
+            app:layout_constraintTop_toBottomOf="@+id/buttonContinuar" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
