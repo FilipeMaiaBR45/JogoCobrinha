@@ -12,15 +12,8 @@ import com.example.jogocobrinha.databinding.ActivityTabuleiroBinding
 
 class Tabuleiro : AppCompatActivity() {
 
-    //shared preferences
-    //coroutinas
-    //botao continuar aparece quando o estado for pausado
-    //viewModel
-
     lateinit var binding: ActivityTabuleiroBinding
     lateinit var viewModel: TabuleiroViewModel
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,26 +27,38 @@ class Tabuleiro : AppCompatActivity() {
         val inflater = LayoutInflater.from(this)
 
         var i = Intent(this, Resultado::class.java)
+        //var intent2 = Intent(this, MainActivity::class.java)
+
 
 
         val params = intent.extras
-        //val dificuldade  = params?.getLong("DIFICULDADE")
-        //Log.i("DIFICULDADE", "$dificuldade")
-        //val tamanho_tabuleiro =  params?.getInt("TAMANHO_TABULEIRO")
-        //Log.i("TAM_TABULEIRO", "$tamanho_tabuleiro")
+        var dificuldade  = params?.getLong("DIFICULDADE", 1000)
+        Log.i("DIFICULDADE", "$dificuldade")
+        var tamanho_tabuleiro =  params?.getInt("TAMANHO_TABULEIRO", 48)
+        Log.i("TAM_TABULEIRO", "$tamanho_tabuleiro")
 
-       // viewModel.alterarDificuldade(dificuldade)
-       // viewModel.alterarTabuleiro(tamanho_tabuleiro, tamanho_tabuleiro)
+        if(dificuldade == null){
+            dificuldade = 1000
+        }
+
+        if(tamanho_tabuleiro == null){
+            tamanho_tabuleiro = 48
+        }
+
+        //viewModel.alterarDificuldade(dificuldade)
+        //viewModel.alterarTabuleiro(tamanho_tabuleiro , tamanho_tabuleiro)
 
 
-        viewModel.mudarMovimento(1)
+        viewModel.mudarMovimento(4)
+
+       // viewModel.limpaTabuleiro()
 
         loadTabuleiro(inflater)
 
-        viewModel.starGame()
+        viewModel.starGame(tamanho_tabuleiro, tamanho_tabuleiro)
 
 
-        runGame(i)
+        runGame(i, dificuldade)
 
 
 
@@ -73,15 +78,18 @@ class Tabuleiro : AppCompatActivity() {
             viewModel.mudarMovimento(4)
         }
 
+        binding.imageButtonPause.setOnClickListener {
+           // startActivity(intent2)
+        }
 
     }
 
 
-    fun runGame(intent : Intent) {
+    fun runGame(intent : Intent, dificuldade : Long) {
 
         Thread {
             while (viewModel.gameStatus.value!! == true) {
-                Thread.sleep(1000)
+                Thread.sleep(viewModel.velocidade.value!!)
                 runOnUiThread {
                     viewModel.limpaTabuleiro()
 

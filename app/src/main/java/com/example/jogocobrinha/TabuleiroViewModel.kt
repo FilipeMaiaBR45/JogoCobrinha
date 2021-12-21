@@ -24,15 +24,15 @@ class TabuleiroViewModel : ViewModel() {
 
 
     private var _velocidade = MutableLiveData<Long>(
-        1 // verificar qual o valor de timeout as threads milisegundos
+        500 // verificar qual o valor de timeout as threads milisegundos
     )
     var velocidade: LiveData<Long> = _velocidade
 
-    private var _row = MutableLiveData<Int>(24)
+    private var _row = MutableLiveData<Int>(48)
 
     var row: LiveData<Int> = _row
 
-    private var _column = MutableLiveData<Int>(24)
+    private var _column = MutableLiveData<Int>(48)
     var column: LiveData<Int> = _column
 
     private var _posicaoFrutaLinha = MutableLiveData<Int>((0 until row.value!! - 1).random())
@@ -56,9 +56,13 @@ class TabuleiroViewModel : ViewModel() {
     //----------------------------------FUNCTIONS-------------------------------------//
 
 
-    fun starGame() {
+    fun starGame(x: Int, y: Int) {
         _gameStatus.value = true
+        _row.value = x
+        _column.value = y
         _listPosicaoCobra.value!!.add(Ponto((row.value!! / 2), (column.value!! / 2)))
+
+
     }
 
     fun gameOver() {
@@ -160,12 +164,12 @@ class TabuleiroViewModel : ViewModel() {
 
 
     // colocar essa funcoes na viewModel de configuracoes
-    fun alterarTabuleiro(row : Int?, column : Int?) {
-        _row.value = row
-        _column.value = column
+    fun alterarTabuleiro(row : Int, column : Int) {
+        _row.value = row -1
+        _column.value = column -1
     }
 
-    fun alterarDificuldade(valorVelocidade : Long?) {
+    fun alterarDificuldade(valorVelocidade : Long) {
         _velocidade.value = valorVelocidade
     }
 

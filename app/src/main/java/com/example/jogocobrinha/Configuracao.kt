@@ -25,23 +25,25 @@ class Configuracao : AppCompatActivity() {
         var b = Bundle()
 
 
+
+
         binding.salvarCfg.setOnClickListener {
-            if(binding.radioButtonFacil.isSelected){
+            if(binding.radioButtonFacil.isChecked){
                 b.putLong("DIFICULDADE", 1000)
-            }else if (binding.radioButtonMedio.isSelected){
-                b.putLong("DIFICULDADE", 1000/2)
-            }else if (binding.radioButtonDificil.isSelected){
-                b.putLong("DIFICULDADE", 1000/4)
+            }else if (binding.radioButtonMedio.isChecked){
+                b.putLong("DIFICULDADE", 500)
+            }else if (binding.radioButtonDificil.isChecked){
+                b.putLong("DIFICULDADE", 250)
             }
 
-            if (binding.radioButton24x24.isSelected){
+            if (binding.radioButton24x24.isChecked){
                 b.putInt("TAMANHO_TABULEIRO", 24)
 
-            }else if (binding.radioButton48x48.isSelected){
+            }else if (binding.radioButton48x48.isChecked){
                 b.putInt("TAMANHO_TABULEIRO", 48)
             }
 
-            intent.putExtras(b)
+            i.putExtras(b)
             startActivity(i)
         }
 

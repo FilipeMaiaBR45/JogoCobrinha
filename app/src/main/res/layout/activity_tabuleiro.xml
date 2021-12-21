@@ -54,6 +54,17 @@
             app:layout_constraintHorizontal_bias="0.48"
             app:layout_constraintStart_toStartOf="parent">
 
+            <ImageButton
+                android:id="@+id/imageButtonPause"
+                android:layout_width="47dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="12dp"
+                android:background="#00FFFFFF"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:srcCompat="@drawable/ic_pause_circle" />
+
             <Button
                 android:id="@+id/buttonMoverCima"
                 android:layout_width="wrap_content"
